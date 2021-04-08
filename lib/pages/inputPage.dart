@@ -1,5 +1,10 @@
+import 'dart:math';
+
 import 'package:bmi_calculator/constants/constant.dart';
+import 'package:bmi_calculator/pages/resultPage.dart';
+import 'package:bmi_calculator/widgets/inputPageWidgets/bottomButton.dart';
 import 'package:bmi_calculator/widgets/inputPageWidgets/buttons.dart';
+import 'package:bmi_calculator/widgets/inputPageWidgets/calculator_brain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +22,7 @@ class _InputPageState extends State<InputPage> {
   int height = 150;
   int weight = 65;
   int age = 18;
+  double bmi = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -231,18 +237,20 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              color: kBottomContainerColor,
-              margin: EdgeInsets.only(top: 20),
-              width: double.infinity,
-              height: 80,
-              child: Center(
-                child: Text(
-                  'Calculate BMI',
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-            ),
+            BottomButton(
+                onPress: () {
+                  CalculatorBrain calc =
+                      CalculatorBrain(height: height, weight: weight);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultPage(
+                                result: calc.bmiResult(),
+                                status: calc.getStatus(),
+                                description: calc.getDescription(),
+                              )));
+                },
+                buttonTitle: 'CALCULATE'),
           ],
         ));
   }
