@@ -1,4 +1,6 @@
 import 'package:bmi_calculator/constants/constant.dart';
+import 'package:bmi_calculator/widgets/inputPageWidgets/buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,7 +14,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-  int defaultHeight = 150;
+  int height = 150;
+  int weight = 65;
+  int age = 18;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +81,7 @@ class _InputPageState extends State<InputPage> {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          defaultHeight.toString(),
+                          height.toString(),
                           style: kNumberTextStyle,
                         ),
                         SizedBox(width: 5),
@@ -99,12 +103,12 @@ class _InputPageState extends State<InputPage> {
                             RoundSliderOverlayShape(overlayRadius: 30.0),
                       ),
                       child: Slider(
-                        value: defaultHeight.toDouble(),
+                        value: height.toDouble(),
                         min: 100.0,
                         max: 250.0,
                         onChanged: (double newValue) {
                           setState(() {
-                            defaultHeight = newValue.round();
+                            height = newValue.round();
                           });
                         },
                       ),
@@ -119,11 +123,109 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: ReusableCard(
                       colour: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'WEIGHT',
+                            style: kLabelTextStyle,
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                weight.toString(),
+                                style: kNumberTextStyle,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                'kg',
+                                style: kLabelTextStyle,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onTap: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onTap: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
                       colour: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                age.toString(),
+                                style: kNumberTextStyle,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                'y',
+                                style: kLabelTextStyle,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onTap: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 20),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onTap: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
